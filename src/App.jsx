@@ -155,14 +155,14 @@ function App() {
     return d * 1000;
   }, [issData.altitude]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     async function getAstronauts() {
       let res = await fetch("http://api.open-notify.org/astros.json");
       let json = await res.json();
       setAstronauts(json);
     }
     getAstronauts();
-  },[])
+  },[])*/
 
   return (
     <div className="app-container">
@@ -206,14 +206,14 @@ function App() {
           <div>Altitude: <span>{issData.altitude} km</span></div>
           <div>Velocity: <span>{issData.velocity} km/h</span></div>
         </div>
-        <div className="info-panel">
+        {/*<div className="info-panel">
           Current people on ISS:
           {astronauts?.people
             ?.filter(person => person.craft === "ISS")
             .map(person => (
               <div key={person.name}>&emsp;- {person.name}</div>
             ))}
-        </div>
+        </div>*/}
       </div>
     </div>
   );
