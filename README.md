@@ -1,6 +1,6 @@
 # ISS Tracker
 
-[https://balhun.github.io/iss-tracker](https://balhun.github.io/iss-tracker)
+[https://isstrackerhunor.netlify.app/](https://isstrackerhunor.netlify.app/)
 
 ## What It Does
 
