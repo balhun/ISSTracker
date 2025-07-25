@@ -28,11 +28,18 @@ html, body, #root {
   height: 100% !important;
 }
 
-/* Bottom info panel */
-.info-panel {
+.panels {
   position: fixed;
   top: 20px;
   left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+}
+
+/* Bottom info panel */
+.info-panel {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -44,7 +51,6 @@ html, body, #root {
   font-size: 14px;
   user-select: none;
   pointer-events: auto;
-  z-index: 1000;
 }
 
 span {

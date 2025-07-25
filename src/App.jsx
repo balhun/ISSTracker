@@ -38,6 +38,7 @@ function App() {
     altitude: 0,
     velocity: 0,
   });
+  const [astronauts, setAstronauts] = useState([]);
 
   
   useEffect(() => {
@@ -154,18 +155,26 @@ function App() {
     return d * 1000;
   }, [issData.altitude]);
 
+  useEffect(() => {
+    async function getAstronauts() {
+      let res = await fetch("http://api.open-notify.org/astros.json");
+      let json = await res.json();
+      setAstronauts(json);
+    }
+    getAstronauts();
+  },[])
+
   return (
     <div className="app-container">
       <div className="map-wrapper">
         <MapContainer
           center={[20, 15]}
           zoom={2.5}
-          scrollWheelZoom={false}
           zoomControl={false}
           doubleClickZoom={false}
-          dragging={true}
-          touchZoom={false}
           keyboard={false}
+          minZoom={2}
+          maxZoom={4}
           maxBounds={[[-90, -180], [90, 180]]}
           maxBoundsViscosity={1.0}
           style={{backgroundColor: "#aad3df"}}
@@ -190,11 +199,21 @@ function App() {
           <ISSOrbit />
         </MapContainer>
       </div>
-      <div className="info-panel">
-        <div>Latitude: <span>{issData.latitude}°</span></div>
-        <div>Longitude: <span>{issData.longitude}°</span></div>
-        <div>Altitude: <span>{issData.altitude} km</span></div>
-        <div>Velocity: <span>{issData.velocity} km/h</span></div>
+      <div className="panels">
+        <div className="info-panel">
+          <div>Latitude: <span>{issData.latitude}°</span></div>
+          <div>Longitude: <span>{issData.longitude}°</span></div>
+          <div>Altitude: <span>{issData.altitude} km</span></div>
+          <div>Velocity: <span>{issData.velocity} km/h</span></div>
+        </div>
+        <div className="info-panel">
+          Current people on ISS:
+          {astronauts?.people
+            ?.filter(person => person.craft === "ISS")
+            .map(person => (
+              <div key={person.name}>&emsp;- {person.name}</div>
+            ))}
+        </div>
       </div>
     </div>
   );
